@@ -1,19 +1,24 @@
 import { SyntheticEvent, useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
 import { AuthService } from "../services/AuthService";
 
 interface LoginProps {
-    authService: AuthService
+    authService: AuthService;
+    setUser: Function;
 }
 
 interface CustomEvent {
     target: HTMLInputElement
 }
 
-export const Login: React.FC<LoginProps> = ({ authService }) => {
+export const Login: React.FC<LoginProps> = ({ authService, setUser }) => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loginAttempted, setLoginAttempted] = useState<boolean>(false);
     const [loginSuccessful, setLoginSuccessful] = useState<boolean>(false);
+
+    const navigate = useNavigate();
+
 
     let loginMessage: JSX.Element;
 
@@ -27,8 +32,13 @@ export const Login: React.FC<LoginProps> = ({ authService }) => {
         e.preventDefault();
 
         setLoginAttempted(true);
-        const loggedIn = await authService.login(username, password);
-        setLoginSuccessful(!!loggedIn)
+        const loggedInUser = await authService.login(username, password);
+        if(loggedInUser) { 
+            setUser(loggedInUser);
+            navigate('/profile')
+        }
+
+        setLoginSuccessful(!!loggedInUser);
     }
 
     return (
