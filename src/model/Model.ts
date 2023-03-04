@@ -5,5 +5,12 @@ export interface User {
 
 export interface UserAttribute {
   Name: string;
-  Valuie: string;
+  Value: string;
+}
+
+export interface Space {
+  spaceId: string;
+  location: string;
+  name: string;
+  photoURL?: string;
 }

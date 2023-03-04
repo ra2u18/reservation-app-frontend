@@ -15,6 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
         <div className="navbar">
             <Link to="/">Home</Link>
             <Link to="/profile">Profile</Link>
+            <Link to="/spaces">Spaces</Link>
             { loginLogout }
         </div>
     );

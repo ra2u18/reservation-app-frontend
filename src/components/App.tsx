@@ -3,12 +3,16 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
 import { User } from "../model/Model";
 import { AuthService } from "../services/AuthService";
+import { DataService } from "../services/DataService";
+
 import { Home } from "./Home";
 import { Login } from "./Login";
 import { Navbar } from "./Navbar";
 import { Profile } from "./Profile";
+import { Spaces } from "./spaces/Spaces";
 
 const authService: AuthService = new AuthService();
+const dataService: DataService = new DataService();
 
 export const App: React.FC<{}> = () => {
   const [user, setUser] = useState<User>();
@@ -19,7 +23,8 @@ export const App: React.FC<{}> = () => {
         <Navbar user={user} />
         <Routes>
           <Route path='/login' element={ <Login authService={authService} setUser={setUser} /> } />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile authService={authService} user={user} />} />
+          <Route path='/spaces' element={<Spaces dataService={dataService} />} />
           <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
