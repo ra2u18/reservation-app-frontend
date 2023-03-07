@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/auth": "^5.1.11",
+    "@aws-sdk/client-s3": "^3.282.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.282.0",
     "@aws-sdk/credential-providers": "^3.282.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

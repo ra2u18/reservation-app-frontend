@@ -5,6 +5,7 @@ import { Amplify } from 'aws-amplify';
 import { config } from './config';
 import { CognitoUser } from '@aws-amplify/auth';
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
+import { CognitoIdentityCredentialProvider } from "@aws-sdk/credential-providers/dist-types/fromCognitoIdentity";
 // import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers';
 
 Amplify.configure({
@@ -17,8 +18,6 @@ Amplify.configure({
     authenticationFlowType: 'USER_PASSWORD_AUTH',
   },
 });
-
-
 
 export class AuthService {
   constructor() {
@@ -33,14 +32,14 @@ export class AuthService {
         cognitoUser: user
       };
     } catch (err) {
-      return undefined
+      return undefined;
     }
   }
 
   public async getAWSTemporaryCreds(user: CognitoUser) {
     const cognitoIdentityPool = `cognito-idp.${config.REGION}.amazonaws.com/${config.USER_POOL_ID}`;
 
-    const provider = fromCognitoIdentityPool({
+    const provider: CognitoIdentityCredentialProvider = fromCognitoIdentityPool({
       identityPoolId: config.IDENTITY_POOL_ID,
       logins: {
         [cognitoIdentityPool]: user.getSignInUserSession()!.getIdToken().getJwtToken(),
@@ -50,7 +49,7 @@ export class AuthService {
 
     const creds = await provider();
 
-    console.log(creds);
+    return creds;
   }
 
   // public async getAWSTemporaryCreds(user: CognitoUser){

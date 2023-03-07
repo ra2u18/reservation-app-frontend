@@ -22,7 +22,8 @@ export const App: React.FC<{}> = () => {
     setUser(user);
 
     try {
-      await authService.getAWSTemporaryCreds(user.cognitoUser);
+      const creds = await authService.getAWSTemporaryCreds(user.cognitoUser);
+      dataService.setCreds(creds);
     } catch (error) {
       console.log('error');
     }
