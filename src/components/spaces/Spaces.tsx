@@ -6,6 +6,7 @@ import { SpaceComponent } from "./SpaceComponent";
 import { ConfirmModalComponent } from "./ConfirmModalComponent";
 
 import './Spaces.css'
+import { Link } from "react-router-dom";
 
 interface SpacesProps {
     dataService: DataService;
@@ -59,6 +60,7 @@ export const Spaces: React.FC<SpacesProps> = ({ dataService }) => {
 
     return <div className="spaces">
         <h2>Welcome to the Spaces page!</h2>
+        <Link to="/create-spaces">Create Spaces</Link> <br />
         { renderSpaces() }
         <ConfirmModalComponent close={closeModal} content={modalContent} show={showModal} />
     </div>

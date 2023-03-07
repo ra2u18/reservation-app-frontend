@@ -1,3 +1,4 @@
+import { ICreateSpaceState } from "../components/spaces/CreateSpace";
 import { Space } from "../model/Model";
 
 export class DataService {
@@ -15,5 +16,9 @@ export class DataService {
         if(spaceId !== '123') return undefined;
 
         return('5555')
+    }
+
+    public async createSpace(spacePayload: ICreateSpaceState) {
+        return '123';
     }
 }

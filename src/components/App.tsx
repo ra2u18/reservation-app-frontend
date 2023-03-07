@@ -9,6 +9,7 @@ import { Home } from "./Home";
 import { Login } from "./Login";
 import { Navbar } from "./Navbar";
 import { Profile } from "./Profile";
+import { CreateSpace } from "./spaces/CreateSpace";
 import { Spaces } from "./spaces/Spaces";
 
 const authService: AuthService = new AuthService();
@@ -25,6 +26,7 @@ export const App: React.FC<{}> = () => {
           <Route path='/login' element={ <Login authService={authService} setUser={setUser} /> } />
           <Route path='/profile' element={<Profile authService={authService} user={user} />} />
           <Route path='/spaces' element={<Spaces dataService={dataService} />} />
+          <Route path='/create-spaces' element={<CreateSpace dataService={dataService} />} />
           <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
