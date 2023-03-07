@@ -9,8 +9,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ user }) => {
     const loginLogout: any = setLoginLogout(user);
 
-    console.log(user)
-
     return (
         <div className="navbar">
             <Link to="/">Home</Link>

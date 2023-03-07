@@ -18,12 +18,22 @@ const dataService: DataService = new DataService();
 export const App: React.FC<{}> = () => {
   const [user, setUser] = useState<User>();
 
+  const handleSetUser = async (user: User) => {
+    setUser(user);
+
+    try {
+      await authService.getAWSTemporaryCreds(user.cognitoUser);
+    } catch (error) {
+      console.log('error');
+    }
+  }
+
   return ( 
     <div className="wrapper">
       <BrowserRouter>
         <Navbar user={user} />
         <Routes>
-          <Route path='/login' element={ <Login authService={authService} setUser={setUser} /> } />
+          <Route path='/login' element={ <Login authService={authService} setUser={handleSetUser} /> } />
           <Route path='/profile' element={<Profile authService={authService} user={user} />} />
           <Route path='/spaces' element={<Spaces dataService={dataService} />} />
           <Route path='/create-spaces' element={<CreateSpace dataService={dataService} />} />
